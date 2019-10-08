@@ -5,12 +5,21 @@
  */
 package Frontera;
 
+import Control.ValidarLogin;
+import Control.ValidarRegistro;
+import Entidad.Sistema;
+import Entidad.Usuario;
+import static Frontera.FramePrincipal.sistema;
+import java.util.ArrayList;
+
 /**
  *
  * @author Estudiante
  */
 public class Registro extends javax.swing.JPanel {
-
+    private Sistema sistema= FramePrincipal.sistema;
+    ArrayList<Usuario> usuariosR = new ArrayList<Usuario>();
+    
     /**
      * Creates new form Registro
      */
@@ -33,6 +42,7 @@ public class Registro extends javax.swing.JPanel {
         nombreTF = new javax.swing.JTextField();
         contraseniaTF = new javax.swing.JTextField();
         validarContraseniaTF = new javax.swing.JTextField();
+        registrarB = new javax.swing.JButton();
 
         jLabel1.setText("Nombre");
 
@@ -40,21 +50,33 @@ public class Registro extends javax.swing.JPanel {
 
         jLabel3.setText("Validar Contraseña");
 
+        registrarB.setText(" Aceptar");
+        registrarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nombreTF, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(contraseniaTF)
-                    .addComponent(validarContraseniaTF))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(registrarB))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(nombreTF, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(contraseniaTF)
+                            .addComponent(validarContraseniaTF))))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -72,9 +94,41 @@ public class Registro extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(validarContraseniaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(registrarB)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registrarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBActionPerformed
+       if(!contraseniaTF.getText().equals(validarContraseniaTF.getText())){
+           System.out.println("Contraseñas no compatibles");
+       }else{
+        Usuario usuarioR = new Usuario();
+        usuarioR.setNombre(nombreTF.getText());
+        usuarioR.setPassword(contraseniaTF.getText());
+        
+        ValidarRegistro validar = new ValidarRegistro();
+        String resultado = validar.VerificarRegistro(usuarioR);
+        System.out.println("----------------");
+        System.out.println(resultado);
+        if(resultado== "Usuario valido"){
+        
+        sistema.setUsuarios(usuariosR);
+        usuariosR.add(usuarioR);
+        
+        for (Usuario u : sistema.getUsuarios()) {
+            System.out.println(u.getNombre());
+            System.out.println(u.getPassword());
+            System.out.println("-------------");
+            
+        }
+        System.out.println("Usuario creado exitosamente");
+        
+        }   
+       }
+    
+    }//GEN-LAST:event_registrarBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -83,6 +137,7 @@ public class Registro extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField nombreTF;
+    private javax.swing.JButton registrarB;
     private javax.swing.JTextField validarContraseniaTF;
     // End of variables declaration//GEN-END:variables
 }

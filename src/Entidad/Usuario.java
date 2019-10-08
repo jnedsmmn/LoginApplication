@@ -10,11 +10,11 @@ package Entidad;
  * @author Estudiante
  */
 public class Usuario {
-    
+
     private String nombre;
     private String password;
-    
-    public Usuario(){    
+
+    public Usuario() {
     }
 
     public String getNombre() {
@@ -32,7 +32,5 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
 }

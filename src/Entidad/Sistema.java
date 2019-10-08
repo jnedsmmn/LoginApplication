@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author Estudiante
  */
 public class Sistema {
-    
-    private ArrayList <Usuario> usuarios;
+
+    private ArrayList<Usuario> usuarios;
 
     public Sistema() {
     }
@@ -25,7 +25,5 @@ public class Sistema {
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-    
-    
-    
+
 }

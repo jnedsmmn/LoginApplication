@@ -13,26 +13,30 @@ import Frontera.FramePrincipal;
  *
  * @author Estudiante
  */
-public class ValidarLogin {
-    private Sistema sistema= FramePrincipal.sistema;
-    
-    public ValidarLogin() {
-    }
+public class ValidarRegistro {
+private Sistema sistema= FramePrincipal.sistema;
 
-    public String VerificarLogin(Usuario usuario) {
+    public ValidarRegistro() {
+    }
+        public String VerificarRegistro(Usuario usuario) {
+        
         if(!VerificarLongitudNombre(usuario.getNombre())){
-        return ("Longitud nombre incorrecta");
+
+            return ("Longitud nombre incorrecta");
+        
         }
         if(!verificarLongitudPassword(usuario.getPassword())){
+
         return ("Longitud contraseña incorrecta");
         }
         for (Usuario u: sistema.getUsuarios()) {
-            if(u.getNombre().equals(usuario.getNombre()) && u.getPassword().equals(usuario.getPassword())){
-            return ("Bienvenido");
+            if(!u.getNombre().equals(usuario.getNombre())){
+
+                return ("Usuario valido");
             }
             
         }
-        return ("Datos incorrctos");
+        return ("Usuario ya registrado");
     }
 
     public boolean VerificarLongitudNombre(String nombre) {
